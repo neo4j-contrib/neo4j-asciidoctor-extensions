@@ -1,6 +1,8 @@
 = Neo4j Asciidoctor Extensions
 :uri-neo4j: https://neo4j.com
 
+image:https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/workflows/CI/badge.svg[CI,link=https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/actions?query=workflow%3ACI]
+
 This repository contains Asciidoctor extensions made by {uri-neo4j}[Neo4j] for processing and publishing AsciiDoc content.
 
 == Usage
