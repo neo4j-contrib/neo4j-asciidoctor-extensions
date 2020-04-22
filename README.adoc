@@ -1,0 +1,126 @@
+= Neo4j Asciidoctor Extensions
+:uri-neo4j: https://neo4j.com
+
+image:https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/workflows/CI/badge.svg[CI,link=https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/actions?query=workflow%3ACI]
+
+This repository contains Asciidoctor extensions made by {uri-neo4j}[Neo4j] for processing and publishing AsciiDoc content.
+
+== Usage
+
+[source,console]
+----
+$ gem install neo4j-asciidoctor-extensions
+$ asciidoctor -r neo4j-asciidoctor-extensions doc.adoc
+----
+
+== Extensions
+
+The Ruby Gem contains 6 distinct extensions:
+
+=== `CourseDocumentAttributesPostProcessor`
+
+A postprocessor that adds attributes about the course.
+
+===  `CypherSyntaxRoleTreeProcessor`
+
+A tree processor that adds a role on code blocks using "cypher-syntax" as a language.
+
+*Usage:*
+
+[source]
+....
+[source,cypher-syntax]
+----
+()
+(p)
+(l)
+(n)
+----
+....
+
+=== `DocumentMetadataGeneratorPostProcessor`
+
+A postprocess that generates a metadata file (in YAML format) from a list of document attributes.
+
+*Usage:*
+
+.file.adoc
+[source,adoc]
+----
+:document-metadata-attrs-include: author,slug,parent-path,tags*,taxonomies*<>
+:tags: intro,course
+:taxonomies: os=linux,programming_language=java,neo4j_version=3-5;3-6
+:slug: intro-neo4j-4-0
+:parent_path: /intro
+----
+
+.file.yml
+[source,adoc]
+----
+slug: intro-neo4j-4-0
+parent_path: /intro
+author:
+  name: Michael Hunger
+  first_name: Michael
+  last_name: Hunger
+  email: michael.hunger@neotechnology.com
+tags:
+  - intro
+  - course
+taxonomies:
+  - key: os
+    values:
+      - linux
+  - key: programming_language
+    values:
+      - java
+  - key: neo4j_version
+    values:
+      - 3-5
+      - 3-6
+----
+
+=== `InlineHighlighter::MonospacedTextInlineMacro`
+
+Inline syntax highlighter based on Rouge.
+Apply syntax highlighting on monospaced text cypher:
+
+*Usage:*
+
+[source,adoc]
+----
+[src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
+----
+
+Apply syntax highlighting on src inline macro:
+
+*Usage:*
+
+[source,adoc]
+----
+src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
+----
+
+=== `RevealJsLinearNavigationTreeProcessor`
+
+A tree process that "flatten" a reveal.js presentation to use a linear navigation.
+By default, the reveal.js converter will use a vertical navigation for the second levels of section titles (and below).
+This extension will effectively prevent that by using only first level section titles.
+
+=== `RevealJsSpeakerNotesAggregatorTreeProcessor`
+A tree processor that aggregates multiple [notes] blocks in a section (slide).
+
+*Usage:*
+
+[source,adoc]
+----
+== Introduction
+
+[notes]
+This is a speaker note.
+
+Hello!
+
+[notes]
+This is another speaker note.
+----
