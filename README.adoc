@@ -119,7 +119,7 @@ By default, the reveal.js converter will use a vertical navigation for the secon
 This extension will effectively prevent that by using only first level section titles.
 
 === `RevealJsSpeakerNotesAggregatorTreeProcessor`
-A tree processor that aggregates multiple [notes] blocks in a section (slide).
+A tree processor that aggregates multiple `[.notes]` blocks in a section (slide).
 
 *Usage:*
 
@@ -127,11 +127,15 @@ A tree processor that aggregates multiple [notes] blocks in a section (slide).
 ----
 == Introduction
 
-[notes]
+[.notes]
+--
 This is a speaker note.
+--
 
 Hello!
 
-[notes]
+[.notes]
+--
 This is another speaker note.
+--
 ----

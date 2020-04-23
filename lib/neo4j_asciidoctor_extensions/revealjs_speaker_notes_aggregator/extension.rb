@@ -13,13 +13,17 @@ module Neo4j
     #
     #   == Introduction
     #
-    #   [notes]
+    #   [.notes]
+    #   --
     #   This is a speaker note.
+    #   --
     #
     #   Hello!
     #
-    #   [notes]
+    #   [.notes]
+    #   --
     #   This is another speaker note.
+    #   --
     #
     class RevealJsSpeakerNotesAggregatorTreeProcessor < Extensions::TreeProcessor
       use_dsl
@@ -30,9 +34,10 @@ module Neo4j
             notes_blocks = section.blocks.select { |block| block.context == :open && block.roles.include?('notes') }
             next if notes_blocks.empty?
 
-            agg_notes_block = Block.new(section, :open, attributes: { 'role' => 'notes' })
+            agg_notes_block = Asciidoctor::Block.new(section, :open, attributes: { 'role' => 'notes' })
             notes_blocks.each do |notes_block|
               section.blocks.delete(notes_block)
+              notes_block.remove_role('notes')
               agg_notes_block << notes_block
             end
             section.blocks << agg_notes_block
