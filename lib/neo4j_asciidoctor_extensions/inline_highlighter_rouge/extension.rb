@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
+require 'rouge'
 
 module Neo4j
   # Asciidoctor extensions by Neo4j
   module AsciidoctorExtensions
-    include Asciidoctor
-
     # Inline syntax highlighter based on Rouge.
     #
     module InlineHighlighter
+      include Asciidoctor
+
       def self.highlight_code(lang, text, doc)
         return '' if text.nil? || text.strip.empty?
 
