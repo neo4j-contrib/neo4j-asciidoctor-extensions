@@ -7,10 +7,10 @@ module Neo4j
   module AsciidoctorExtensions
     include Asciidoctor
 
-    # A postprocessor that adds attributes about the course.
+    # A tree processor that adds attributes about the course.
     # /!\ This extension is tightly coupled to the course publishing project and should not be used for other purposes /!\
     #
-    class CourseDocumentAttributesPostProcessor < Extensions::Postprocessor
+    class CourseDocumentAttributesTreeProcessor < Extensions::TreeProcessor
       use_dsl
 
       # TODO: this slug should be configurable
