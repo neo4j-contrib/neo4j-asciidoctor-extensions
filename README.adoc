@@ -101,6 +101,17 @@ Apply syntax highlighting on src inline macro:
 src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
 ----
 
+=== `InlineHighlighter::SrcInlineMacro`
+
+Apply syntax highlighting on src inline macro:
+
+*Usage:*
+
+[source,adoc]
+----
+src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
+----
+
 === `RevealJsLinearNavigationTreeProcessor`
 
 A tree process that "flatten" a reveal.js presentation to use a linear navigation.
