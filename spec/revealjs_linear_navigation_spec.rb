@@ -5,7 +5,7 @@ require 'asciidoctor-revealjs'
 require_relative '../lib/neo4j_asciidoctor_extensions/revealjs_linear_navigation'
 
 describe Neo4j::AsciidoctorExtensions::RevealJsLinearNavigationTreeProcessor do
-  context 'convert to html5' do
+  context 'convert to reveal.js' do
     it 'should produce a linear navigation' do
       input = <<~'ADOC'
         = Introduction to Neo4j 4.0
