@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+require_relative 'extensions/course_document_attributes'
+require_relative 'extensions/cypher_syntax_role'
+require_relative 'extensions/document_metadata_generator'
+require_relative 'extensions/inline_highlighter_rouge'
+require_relative 'extensions/revealjs_linear_navigation'
+require_relative 'extensions/revealjs_speaker_notes_aggregator'

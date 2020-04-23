@@ -2,7 +2,7 @@
 
 require 'asciidoctor'
 require 'asciidoctor-revealjs'
-require_relative '../lib/neo4j_asciidoctor_extensions/revealjs_speaker_notes_aggregator'
+require_relative '../lib/neo4j/asciidoctor/extensions/revealjs_speaker_notes_aggregator'
 
 describe Neo4j::AsciidoctorExtensions::RevealJsSpeakerNotesAggregatorTreeProcessor do
   context 'convert to reveal.js' do

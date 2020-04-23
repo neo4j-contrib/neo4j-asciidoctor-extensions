@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'asciidoctor'
-require_relative '../lib/neo4j_asciidoctor_extensions/document_metadata_generator'
+require_relative '../lib/neo4j/asciidoctor/extensions/document_metadata_generator'
 
 RSpec.configure do |config|
   config.after(:each) do

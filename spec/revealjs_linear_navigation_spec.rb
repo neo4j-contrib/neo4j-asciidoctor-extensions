@@ -2,7 +2,7 @@
 
 require 'asciidoctor'
 require 'asciidoctor-revealjs'
-require_relative '../lib/neo4j_asciidoctor_extensions/revealjs_linear_navigation'
+require_relative '../lib/neo4j/asciidoctor/extensions/revealjs_linear_navigation'
 
 describe Neo4j::AsciidoctorExtensions::RevealJsLinearNavigationTreeProcessor do
   context 'convert to reveal.js' do

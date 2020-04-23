@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'asciidoctor'
-require_relative '../lib/neo4j_asciidoctor_extensions/cypher_syntax_role'
+require_relative '../lib/neo4j/asciidoctor/extensions/cypher_syntax_role'
 
 describe Neo4j::AsciidoctorExtensions::CypherSyntaxRoleTreeProcessor do
   context 'convert to html5' do

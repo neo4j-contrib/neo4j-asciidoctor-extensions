@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'asciidoctor'
-require_relative '../lib/neo4j_asciidoctor_extensions/inline_highlighter_rouge'
+require_relative '../lib/neo4j/asciidoctor/extensions/inline_highlighter_rouge'
 
 # rubocop:disable Metrics/LineLength
 describe Neo4j::AsciidoctorExtensions::InlineHighlighter::MonospacedTextInlineMacro do

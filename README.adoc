@@ -5,23 +5,47 @@ image:https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/workflows/CI
 
 This repository contains Asciidoctor extensions made by {uri-neo4j}[Neo4j] for processing and publishing AsciiDoc content.
 
-== Usage
+== Install
 
 [source,console]
 ----
 $ gem install neo4j-asciidoctor-extensions
-$ asciidoctor -r neo4j-asciidoctor-extensions doc.adoc
 ----
+
+== Usage
+
+=== CLI
+
+[source,console]
+----
+$ asciidoctor -r neo4j/asciidoctor/extensions doc.adoc
+----
+
+=== API
+
+[source,ruby]
+----
+require 'neo4j/asciidoctor/extensions'
+----
+
+In addition, you can require individual extension:
+
+[source,ruby]
+----
+require 'neo4j/asciidoctor/extensions/revealjs_linear_navigation'
+----
+
+See below for the complete list of extensions.
 
 == Extensions
 
-The Ruby Gem contains 6 distinct extensions:
+The Ruby gem contains 6 distinct extensions:
 
-=== `CourseDocumentAttributesPostProcessor`
+=== `course_document_attributes`
 
 A postprocessor that adds attributes about the course.
 
-===  `CypherSyntaxRoleTreeProcessor`
+=== `cypher_syntax_role`
 
 A tree processor that adds a role on code blocks using "cypher-syntax" as a language.
 
@@ -38,7 +62,7 @@ A tree processor that adds a role on code blocks using "cypher-syntax" as a lang
 ----
 ....
 
-=== `DocumentMetadataGeneratorPostProcessor`
+=== `document_metadata_generator`
 
 A postprocess that generates a metadata file (in YAML format) from a list of document attributes.
 
@@ -80,45 +104,27 @@ taxonomies:
       - 3-6
 ----
 
-=== `InlineHighlighter::MonospacedTextInlineMacro`
+=== `inline_highlighter_rouge`
 
 Inline syntax highlighter based on Rouge.
-Apply syntax highlighting on monospaced text cypher:
+It applies syntax highlighting on both monospaced text cypher and `src` inline macro:
 
 *Usage:*
 
 [source,adoc]
 ----
 [src-cypher]`MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName`
-----
 
-Apply syntax highlighting on src inline macro:
-
-*Usage:*
-
-[source,adoc]
-----
 src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
 ----
 
-=== `InlineHighlighter::SrcInlineMacro`
-
-Apply syntax highlighting on src inline macro:
-
-*Usage:*
-
-[source,adoc]
-----
-src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
-----
-
-=== `RevealJsLinearNavigationTreeProcessor`
+=== `revealjs_linear_navigation`
 
 A tree process that "flatten" a reveal.js presentation to use a linear navigation.
 By default, the reveal.js converter will use a vertical navigation for the second levels of section titles (and below).
 This extension will effectively prevent that by using only first level section titles.
 
-=== `RevealJsSpeakerNotesAggregatorTreeProcessor`
+=== `revealjs_speaker_notes_aggregator`
 A tree processor that aggregates multiple `[.notes]` blocks in a section (slide).
 
 *Usage:*

@@ -1,8 +1,0 @@
-# frozen_string_literal: true
-
-require_relative 'neo4j_asciidoctor_extensions/course_document_attributes'
-require_relative 'neo4j_asciidoctor_extensions/cypher_syntax_role'
-require_relative 'neo4j_asciidoctor_extensions/document_metadata_generator'
-require_relative 'neo4j_asciidoctor_extensions/inline_highlighter_rouge'
-require_relative 'neo4j_asciidoctor_extensions/revealjs_linear_navigation'
-require_relative 'neo4j_asciidoctor_extensions/revealjs_speaker_notes_aggregator'
