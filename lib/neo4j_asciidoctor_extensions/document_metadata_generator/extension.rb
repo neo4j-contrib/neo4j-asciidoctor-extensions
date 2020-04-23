@@ -7,11 +7,15 @@ module Neo4j
   module AsciidoctorExtensions
     include Asciidoctor
 
-    VALUE_TYPE = {
-      STRING: '',
-      LIST_STRING: '',
-      LIST_TUPLES: ''
-    }.freeze
+    # Type of value
+    module ValueType
+      # string
+      STRING = 1
+      # [string]
+      LIST_STRING = 2
+      # [<string,string>]
+      LIST_TUPLES = 3
+    end
 
     # A postprocess that generates a metadata file (in YAML format) from a list of document attributes.
     #
@@ -79,18 +83,18 @@ module Neo4j
 
       def resolve_value_type(attr_include)
         if attr_include.end_with? '*'
-          VALUE_TYPE[:LIST_STRING]
-        elsif attr_include.end_with? '*<>'
-          VALUE_TYPE[:LIST_TUPLES]
+          ValueType::LIST_STRING
+        elsif attr_include.end_with? '*&lt;&gt;'
+          ValueType::LIST_TUPLES
         else
-          VALUE_TYPE[:STRING]
+          ValueType::STRING
         end
       end
 
       def resolve_attr_name(attr_include)
         attr_include
           .gsub(/\*$/, '')
-          .gsub(/\*<>$/, '')
+          .gsub(/\*&lt;&gt;$/, '')
           .gsub('-', '_')
       end
 
@@ -108,9 +112,9 @@ module Neo4j
           author['last_name'] = document.attr 'lastname'
           author['email'] = document.attr 'email'
           author
-        elsif value_type == VALUE_TYPE[:LIST_STRING]
+        elsif value_type == ValueType::LIST_STRING
           split_values(attr_name, document)
-        elsif value_type == VALUE_TYPE[:LIST_TUPLES]
+        elsif value_type == ValueType::LIST_TUPLES
           split_values(attr_name, document)
             .map do |tuple|
             key, value = tuple.split('=')

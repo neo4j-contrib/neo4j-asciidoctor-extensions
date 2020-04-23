@@ -26,6 +26,10 @@ GEM
       thread_safe (~> 0.3.0)
       treetop (~> 1.6.0)
       ttfunk (~> 1.5.0, >= 1.5.1)
+    asciidoctor-revealjs (4.0.1)
+      asciidoctor (>= 2.0.0, < 3.0.0)
+      concurrent-ruby (~> 1.0)
+      thread_safe (~> 0.3.5)
     ast (2.4.0)
     concurrent-ruby (1.1.6)
     css_parser (1.7.1)
@@ -94,6 +98,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  asciidoctor-revealjs (~> 4.0)
   neo4j-asciidoctor-extensions!
   rake (~> 12.3.2)
   rspec (~> 3.8.0)

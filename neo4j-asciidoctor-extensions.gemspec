@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'asciidoctor-pdf', '1.5.3'
   s.add_runtime_dependency 'rouge', '~> 3.18.0'
 
+  s.add_development_dependency 'asciidoctor-revealjs', '~> 4.0'
   s.add_development_dependency 'rake', '~> 12.3.2'
   s.add_development_dependency 'rspec', '~> 3.8.0'
   s.add_development_dependency 'rubocop', '~> 0.74.0'
