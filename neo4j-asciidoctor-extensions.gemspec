@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
     'bug_tracker_uri' => 'https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/issues',
     'source_code_uri' => 'https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions'
   }
+  s.files = `git ls-files`.split($RS)
+  s.test_files = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'asciidoctor', '~> 2.0.0'
