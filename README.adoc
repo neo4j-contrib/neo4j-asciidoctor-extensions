@@ -1,4 +1,5 @@
 = Neo4j Asciidoctor Extensions
+:caution-caption: :fire:
 :uri-neo4j: https://neo4j.com
 
 image:https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/workflows/CI/badge.svg[CI,link=https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions/actions?query=workflow%3ACI]
@@ -41,15 +42,30 @@ See below for the complete list of extensions.
 
 The Ruby gem contains 6 distinct extensions:
 
-=== `course_document_attributes`
+=== Neo4j course attributes
 
-A postprocessor that adds attributes about the course.
+A postprocessor that adds attributes about a course on the `Document`.
 
-=== `cypher_syntax_role`
+[CAUTION]
+====
+This extension is tightly coupled to the course publishing project and should not be used for other purposes
+====
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/course_document_attributes'
+----
+
+=== Cypher syntax role
 
 A tree processor that adds a role on code blocks using "cypher-syntax" as a language.
 
-*Usage:*
+==== Usage
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/cypher_syntax_role'
+----
 
 [source]
 ....
@@ -62,11 +78,16 @@ A tree processor that adds a role on code blocks using "cypher-syntax" as a lang
 ----
 ....
 
-=== `document_metadata_generator`
+=== Metadata generator (YAML)
 
 A postprocess that generates a metadata file (in YAML format) from a list of document attributes.
 
-*Usage:*
+==== Usage
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/document_metadata_generator'
+----
 
 .file.adoc
 [source,adoc]
@@ -79,7 +100,7 @@ A postprocess that generates a metadata file (in YAML format) from a list of doc
 ----
 
 .file.yml
-[source,adoc]
+[source,yaml]
 ----
 slug: intro-neo4j-4-0
 parent_path: /intro
@@ -104,12 +125,17 @@ taxonomies:
       - 3-6
 ----
 
-=== `inline_highlighter_rouge`
+=== Inline syntax highlighter based on Rouge
 
 Inline syntax highlighter based on Rouge.
 It applies syntax highlighting on both monospaced text cypher and `src` inline macro:
 
-*Usage:*
+==== Usage
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/inline_highlighter_rouge'
+----
 
 [source,adoc]
 ----
@@ -118,16 +144,29 @@ It applies syntax highlighting on both monospaced text cypher and `src` inline m
 src:cypher[MATCH (c:Customer {customerName: 'ABCCO'}) RETURN c.BOUGHT.productName]
 ----
 
-=== `revealjs_linear_navigation`
+=== Linear navigation for reveal.js
 
 A tree process that "flatten" a reveal.js presentation to use a linear navigation.
 By default, the reveal.js converter will use a vertical navigation for the second levels of section titles (and below).
 This extension will effectively prevent that by using only first level section titles.
 
-=== `revealjs_speaker_notes_aggregator`
+==== Usage
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/revealjs_linear_navigation'
+----
+
+=== Notes aggregator for reveal.js
+
 A tree processor that aggregates multiple `[.notes]` blocks in a section (slide).
 
-*Usage:*
+==== Usage
+
+[source,rb]
+----
+require 'neo4j/asciidoctor/extensions/revealjs_speaker_notes_aggregator'
+----
 
 [source,adoc]
 ----
@@ -144,6 +183,34 @@ Hello!
 --
 This is another speaker note.
 --
+----
+
+=== Document attribute update
+
+A tree processor that update an attribute depending on a given rule.
+
+==== Usage
+
+In the example below, we update the value of the `slug` attribute depending on the `stage` attribute:
+[source,rb]
+----
+require 'asciidoctor/extensions'
+require 'neo4j/asciidoctor/extensions/attribute_update/extension'
+
+Asciidoctor::Extensions.register do
+  ext = Neo4j::AsciidoctorExtensions::AttributeUpdateTreeProcessor
+  tree_processor ext.new attr_name: 'slug',
+                         update_rule: lambda { |document, value|
+                           case document.attr('stage')
+                           when 'production'
+                             value
+                           when 'development'
+                             "_dev_#{value}"
+                           else
+                             "_test_#{value}"
+                           end
+                         }
+end
 ----
 
 == Release
