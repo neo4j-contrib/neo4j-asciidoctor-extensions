@@ -24,6 +24,9 @@ jobs:
           printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > $HOME/.gem/credentials
         env:
           RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+      - name: Build gem
+        run: |
+          bundle exec rake build
       - name: Publish to rubygems.org
         run: |
           gem push neo4j-asciidoctor-extensions-${GITHUB_REF#refs/tags/v}.gem
