@@ -29,5 +29,5 @@ jobs:
           bundle exec rake build
       - name: Publish to rubygems.org
         run: |
-          gem push neo4j-asciidoctor-extensions-${GITHUB_REF#refs/tags/v}.gem
+          gem push pkg/neo4j-asciidoctor-extensions-${GITHUB_REF#refs/tags/v}.gem
 
