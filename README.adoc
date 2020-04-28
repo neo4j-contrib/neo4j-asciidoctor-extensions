@@ -216,7 +216,7 @@ end
 == Release
 
 The release process is automated and relies on GitHub Actions.
-We are using the :robot: `neo4j-oss-build` account to published on https://rubygems.org/gems/neo4j-asciidoctor-extensions.
+We are using the :robot: `neo4j-oss-build` account to publish on https://rubygems.org/gems/neo4j-asciidoctor-extensions.
 
 The `RUBYGEMS_API_KEY` secret is configured on GitHub.
 See the `.github/workflows/release.yml` file for details.
