@@ -84,7 +84,7 @@ module Neo4j
       def resolve_value_type(attr_include)
         if attr_include.end_with? '*'
           ValueType::LIST_STRING
-        elsif attr_include.end_with? '*&lt;&gt;'
+        elsif (attr_include.end_with? '*&lt;&gt;') || (attr_include.end_with? '*<>')
           ValueType::LIST_TUPLES
         else
           ValueType::STRING
@@ -95,6 +95,7 @@ module Neo4j
         attr_include
           .gsub(/\*$/, '')
           .gsub(/\*&lt;&gt;$/, '')
+          .gsub(/\*<>$/, '')
           .gsub('-', '_')
       end
 
