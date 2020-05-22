@@ -69,7 +69,7 @@ module Neo4j
               attr_name = resolve_attr_name(attr_include)
               if document.attr? attr_name
                 attr_value = resolve_attribute_value(attr_name, document, value_type)
-                metadata[attr_name] = attr_value
+                metadata[attr_name.gsub('-', '_')] = attr_value
               end
             end
             metadata['title'] = document.doctitle
@@ -96,7 +96,6 @@ module Neo4j
           .gsub(/\*$/, '')
           .gsub(/\*&lt;&gt;$/, '')
           .gsub(/\*<>$/, '')
-          .gsub('-', '_')
       end
 
       def write(metadata, outfile)

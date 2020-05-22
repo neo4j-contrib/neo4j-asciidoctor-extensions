@@ -115,5 +115,21 @@ describe Neo4j::AsciidoctorExtensions::DocumentMetadataGeneratorPostProcessor do
       expect(taxonomies.detect { |taxonomy| taxonomy['key'] == 'programming_language' }['values']).to eql(%w[java])
       expect(taxonomies.detect { |taxonomy| taxonomy['key'] == 'neo4j_version' }['values']).to eql(%w[3-5 3-6])
     end
+    it 'should replace - by _ in the attribute name' do
+      input = <<~'ADOC'
+        = Introduction to Neo4j 4.0
+        :slug: introduction-neo4j-4-0
+        :parent-path: /labs
+
+        This is a paragraph.
+      ADOC
+      Asciidoctor.convert(input, safe: 'safe', to_file: 'spec/output/test.html', attributes: {
+          'document-metadata-attrs-include' => 'slug,parent-path'
+      })
+      metadata = YAML.load_file('spec/output/test.yml')
+      expect(metadata['title']).to eql('Introduction to Neo4j 4.0')
+      expect(metadata['slug']).to eql('introduction-neo4j-4-0')
+      expect(metadata['parent_path']).to eql('/labs')
+    end
   end
 end
