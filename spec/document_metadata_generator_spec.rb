@@ -124,8 +124,8 @@ describe Neo4j::AsciidoctorExtensions::DocumentMetadataGeneratorPostProcessor do
         This is a paragraph.
       ADOC
       Asciidoctor.convert(input, safe: 'safe', to_file: 'spec/output/test.html', attributes: {
-          'document-metadata-attrs-include' => 'slug,parent-path'
-      })
+                            'document-metadata-attrs-include' => 'slug,parent-path'
+                          })
       metadata = YAML.load_file('spec/output/test.yml')
       expect(metadata['title']).to eql('Introduction to Neo4j 4.0')
       expect(metadata['slug']).to eql('introduction-neo4j-4-0')
