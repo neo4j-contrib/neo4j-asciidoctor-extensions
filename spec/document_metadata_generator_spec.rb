@@ -131,5 +131,23 @@ describe Neo4j::AsciidoctorExtensions::DocumentMetadataGeneratorPostProcessor do
       expect(metadata['slug']).to eql('introduction-neo4j-4-0')
       expect(metadata['parent_path']).to eql('/labs')
     end
+    it 'should ignore empty value in taxonomies' do
+      input = <<~'ADOC'
+        = Introduction to Neo4j 4.0
+        :slug: introduction-neo4j-4-0
+        :taxonomies: neo4j_versions= , tags= intro ; neo4j;;
+
+        This is a paragraph.
+      ADOC
+      Asciidoctor.convert(input, safe: 'safe', to_file: 'spec/output/test.html', attributes: {
+          'document-metadata-attrs-include' => 'slug,taxonomies*<>'
+      })
+      metadata = YAML.load_file('spec/output/test.yml')
+      expect(metadata['title']).to eql('Introduction to Neo4j 4.0')
+      expect(metadata['slug']).to eql('introduction-neo4j-4-0')
+      taxonomies = metadata['taxonomies']
+      expect(taxonomies.detect { |taxonomy| taxonomy['key'] == 'neo4j_versions' }['values']).to eql([])
+      expect(taxonomies.detect { |taxonomy| taxonomy['key'] == 'tags' }['values']).to eql(%w[intro neo4j])
+    end
   end
 end

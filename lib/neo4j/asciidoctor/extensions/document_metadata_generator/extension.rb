@@ -118,7 +118,7 @@ module Neo4j
           split_values(attr_name, document)
             .map do |tuple|
             key, value = tuple.split('=')
-            { 'key' => key.strip, 'values' => value.strip.split(';').map(&:strip).reject(&:empty?) }
+            { 'key' => key.strip, 'values' => (value && value.strip.split(';').map(&:strip).reject(&:empty?)) || [] }
           end
         else
           document.attr attr_name
