@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     neo4j-asciidoctor-extensions (0.2.0)
-      asciidoctor (~> 2.0.0)
+      asciidoctor (~> 2.0)
       asciidoctor-pdf (= 1.5.3)
-      rouge (~> 3.18.0)
+      rouge (~> 3.18)
 
 GEM
   remote: https://rubygems.org/

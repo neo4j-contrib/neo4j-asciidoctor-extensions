@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.test_files = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'asciidoctor', '~> 2.0.0'
+  s.add_runtime_dependency 'asciidoctor', '~> 2.0'
   s.add_runtime_dependency 'asciidoctor-pdf', '1.5.3'
-  s.add_runtime_dependency 'rouge', '~> 3.18.0'
+  s.add_runtime_dependency 'rouge', '~> 3.18'
 
   s.add_development_dependency 'asciidoctor-revealjs', '~> 4.0'
   s.add_development_dependency 'rake', '~> 12.3.2'
