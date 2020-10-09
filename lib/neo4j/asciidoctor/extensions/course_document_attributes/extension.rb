@@ -17,18 +17,16 @@ module Neo4j
       TESTING_SLUG_PREFIX = '_testing_'
 
       def process(document)
-        if (docdir = document.attr 'docdir')
-          # TODO: this path should be configurable
-          path = File.expand_path('../build/online/asciidoctor-module-descriptor.yml', docdir)
-          if File.exist?(path)
+        if (module_descriptor_path = document.attr('module-descriptor-path'))
+          if File.exist?(module_descriptor_path)
             require 'yaml'
-            module_descriptor = YAML.load_file(path)
-            if (document_slug = document.attr 'slug') && document.attr('stage') != 'production'
+            module_descriptor = YAML.load_file(module_descriptor_path)
+            if (document_slug = document.attr('slug')) && document.attr('stage') != 'production'
               document_slug = "#{TESTING_SLUG_PREFIX}#{document_slug}"
-              document.set_attr 'slug', document_slug
+              document.set_attr('slug', document_slug)
             end
             set_attributes(document, document_slug, module_descriptor)
-            document.set_attribute 'module-name', module_descriptor['module_name']
+            document.set_attribute('module-name', module_descriptor['module_name'])
           end
         end
         document
@@ -38,17 +36,17 @@ module Neo4j
 
       def set_attributes(document, document_slug, module_descriptor)
         module_descriptor['pages'].each_with_index do |page, index|
-          document.set_attribute "module-toc-link-#{index}", page['url']
-          document.set_attribute "module-toc-title-#{index}", page['title']
+          document.set_attribute("module-toc-link-#{index}", page['url'])
+          document.set_attribute("module-toc-title-#{index}", page['title'])
           page_slug = page['slug']
           page_slug = "#{TESTING_SLUG_PREFIX}#{page_slug}" unless document.attr('stage') == 'production'
-          document.set_attribute "module-toc-slug-#{index}", page_slug
-          document.set_attribute "module-quiz-#{index}", page['quiz']
+          document.set_attribute("module-toc-slug-#{index}", page_slug)
+          document.set_attribute("module-quiz-#{index}", page['quiz'])
           next unless document_slug == page_slug
 
           set_next_attributes(document, page)
-          document.set_attribute 'module-quiz', page['quiz']
-          document.set_attribute 'module-certificate', page['certificate']
+          document.set_attribute('module-quiz', page['quiz'])
+          document.set_attribute('module-certificate', page['certificate'])
         end
       end
 
@@ -57,8 +55,8 @@ module Neo4j
 
         next_page_slug = page['next']['slug']
         next_page_slug = "#{TESTING_SLUG_PREFIX}#{next_page_slug}" unless document.attr('stage') == 'production'
-        document.set_attr 'module-next-slug', next_page_slug, false
-        document.set_attr 'module-next-title', page['next']['title'], false
+        document.set_attr('module-next-slug', next_page_slug, false)
+        document.set_attr('module-next-title', page['next']['title'], false)
       end
     end
   end
