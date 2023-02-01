@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'neo4j-asciidoctor-extensions'
-  s.version = '1.0.1'
+  s.version = '1.0.2'
   s.summary = 'Asciidoctor extensions by Neo4j.'
   s.description = 'Asciidoctor extensions by Neo4j.'
 
