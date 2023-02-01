@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'asciidoctor'
 require_relative '../lib/neo4j/asciidoctor/extensions/document_metadata_generator'
 

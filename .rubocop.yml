@@ -1,11 +1,27 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
 Style/Encoding:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 160
 
 Metrics/MethodLength:
   Max: 25
 
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
 Metrics/AbcSize:
-  Max: 20
+  Max: 25

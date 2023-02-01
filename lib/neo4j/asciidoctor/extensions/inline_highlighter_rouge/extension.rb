@@ -29,7 +29,7 @@ module Neo4j
       class MonospacedTextInlineMacro < Extensions::InlineMacroProcessor
         use_dsl
         named :monospaced_highlighter
-        match %r{<code class="src-([a-z]+)">([^<]+)<\/code>}i
+        match %r{<code class="src-([a-z]+)">([^<]+)</code>}i
         positional_attributes :content
 
         def process(parent, target, attrs)

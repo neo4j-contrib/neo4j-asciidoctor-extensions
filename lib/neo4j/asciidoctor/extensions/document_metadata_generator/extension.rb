@@ -55,26 +55,24 @@ module Neo4j
       use_dsl
 
       def process(document, output)
-        if (attrs_include = document.attr 'document-metadata-attrs-include')
-          if (outfile = document.attr 'outfile')
-            require 'yaml'
-            metadata = {}
-            attrs_include = attrs_include
-                            .split(',')
-                            .map(&:strip)
-                            .reject(&:empty?)
+        if (attrs_include = document.attr 'document-metadata-attrs-include') && (outfile = document.attr 'outfile')
+          require 'yaml'
+          metadata = {}
+          attrs_include = attrs_include
+                          .split(',')
+                          .map(&:strip)
+                          .reject(&:empty?)
 
-            attrs_include.each do |attr_include|
-              value_type = resolve_value_type(attr_include)
-              attr_name = resolve_attr_name(attr_include)
-              if document.attr? attr_name
-                attr_value = resolve_attribute_value(attr_name, document, value_type)
-                metadata[attr_name.gsub('-', '_')] = attr_value
-              end
+          attrs_include.each do |attr_include|
+            value_type = resolve_value_type(attr_include)
+            attr_name = resolve_attr_name(attr_include)
+            if document.attr? attr_name
+              attr_value = resolve_attribute_value(attr_name, document, value_type)
+              metadata[attr_name.gsub('-', '_')] = attr_value
             end
-            metadata['title'] = document.doctitle
-            write(metadata, outfile)
           end
+          metadata['title'] = document.doctitle
+          write(metadata, outfile)
         end
         output
       end
@@ -101,7 +99,7 @@ module Neo4j
       def write(metadata, outfile)
         outputdir = File.dirname(outfile)
         filename = File.basename(outfile, File.extname(outfile))
-        File.open("#{outputdir}/#{filename}.yml", 'w') { |file| file.write(metadata.to_yaml) }
+        File.write("#{outputdir}/#{filename}.yml", metadata.to_yaml)
       end
 
       def resolve_attribute_value(attr_name, document, value_type)

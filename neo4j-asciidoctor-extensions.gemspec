@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'neo4j-asciidoctor-extensions'
-  s.version = '0.3.1'
+  s.version = '1.0.0'
   s.summary = 'Asciidoctor extensions by Neo4j.'
   s.description = 'Asciidoctor extensions by Neo4j.'
 
@@ -15,15 +15,14 @@ Gem::Specification.new do |s|
     'source_code_uri' => 'https://github.com/neo4j-contrib/neo4j-asciidoctor-extensions'
   }
   s.files = `git ls-files`.split($RS)
-  s.test_files = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'asciidoctor', '~> 2.0'
-  s.add_runtime_dependency 'asciidoctor-pdf', '1.5.3'
+  s.add_runtime_dependency 'asciidoctor-pdf', '~> 2.3'
   s.add_runtime_dependency 'rouge', '~> 3.18'
 
   s.add_development_dependency 'asciidoctor-revealjs', '~> 4.0'
   s.add_development_dependency 'rake', '~> 12.3.2'
   s.add_development_dependency 'rspec', '~> 3.8.0'
-  s.add_development_dependency 'rubocop', '~> 0.74.0'
+  s.add_development_dependency 'rubocop', '~> 1.44.0'
 end

@@ -17,17 +17,15 @@ module Neo4j
       TESTING_SLUG_PREFIX = '_testing_'
 
       def process(document)
-        if (module_descriptor_path = document.attr('module-descriptor-path'))
-          if File.exist?(module_descriptor_path)
-            require 'yaml'
-            module_descriptor = YAML.load_file(module_descriptor_path)
-            if (document_slug = document.attr('slug')) && document.attr('stage') != 'production'
-              document_slug = "#{TESTING_SLUG_PREFIX}#{document_slug}"
-              document.set_attr('slug', document_slug)
-            end
-            set_attributes(document, document_slug, module_descriptor)
-            document.set_attribute('module-name', module_descriptor['module_name'])
+        if (module_descriptor_path = document.attr('module-descriptor-path')) && File.exist?(module_descriptor_path)
+          require 'yaml'
+          module_descriptor = YAML.load_file(module_descriptor_path)
+          if (document_slug = document.attr('slug')) && document.attr('stage') != 'production'
+            document_slug = "#{TESTING_SLUG_PREFIX}#{document_slug}"
+            document.set_attr('slug', document_slug)
           end
+          set_attributes(document, document_slug, module_descriptor)
+          document.set_attribute('module-name', module_descriptor['module_name'])
         end
         document
       end

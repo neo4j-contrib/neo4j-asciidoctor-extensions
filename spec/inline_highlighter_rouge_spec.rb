@@ -3,7 +3,7 @@
 require 'asciidoctor'
 require_relative '../lib/neo4j/asciidoctor/extensions/inline_highlighter_rouge'
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 describe Neo4j::AsciidoctorExtensions::InlineHighlighter::MonospacedTextInlineMacro do
   context 'convert to html5' do
     it 'should apply syntax highlighting on monospaced text cypher' do
@@ -27,4 +27,4 @@ describe Neo4j::AsciidoctorExtensions::InlineHighlighter::SrcInlineMacro do
     end
   end
 end
-# rubocop:enable Metrics/LineLength
+# rubocop:enable Layout/LineLength

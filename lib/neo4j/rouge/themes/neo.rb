@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- #
 # frozen_string_literal: true
 
-require 'rouge' unless defined? ::Rouge::Lexers
+require 'rouge' unless defined? Rouge::Lexers
 
 module Rouge
   module Themes
